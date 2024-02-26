@@ -3,7 +3,7 @@
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
-    <a class="navbar-brand me-2" href="/discovery/v2/events.json">
+    <a class="navbar-brand me-2" href="/">
       TicketMaster
     </a>
 

@@ -15,10 +15,10 @@ use App\Http\Controllers\EventInfo;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/discovery/v2/events.json', [EventInfo::class, 'getEvents']);
+Route::get('/', [EventInfo::class, 'getEvents']);
 Route::get('/saveEvents', [AddEvent::class, 'saveEvents']);
 Route::get('/newEvents', [EventInfo::class, 'getNewEvents']);
