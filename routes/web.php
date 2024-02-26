@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AddEvent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventInfo;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/discovery/v2/events.json', [EventInfo::class, 'getEvents']);
+Route::get('/saveEvents', [AddEvent::class, 'saveEvents']);
