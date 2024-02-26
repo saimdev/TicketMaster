@@ -3,13 +3,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\NewEvent;
 
 class EventInfo extends Controller
 {
     public function getEvents(Request $request)
     {
         $page = $request->query('page', 0);
-        $size = $request->query('size', 1);
+        $size = $request->query('size', 10);
 
         $response = Http::get('https://app.ticketmaster.com/discovery/v2/events.json', [
             'apikey' => 'eVm5wgNkQ7gcGbjf2QKNxlvMDGgASVAI',
@@ -27,6 +28,17 @@ class EventInfo extends Controller
             return view('events', compact('events', 'links'));
         } else {
             return "Failed to fetch events. Error: " . $response->status();
+        }
+    }
+
+    public function getNewEvents()
+    {
+        $events = NewEvent::all();
+
+        if ($events) {
+            return view('newevents', compact('events'));
+        } else {
+            echo "Failed to fetch new events.";
         }
     }
 // }

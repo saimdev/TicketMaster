@@ -35,7 +35,7 @@
 <body>
     <x-header/> 
     <div class="mt-1">
-    <h1>Events</h1>
+    <h1>All Events</h1>
     <div class="table-wrapper">
         <table class="table">
             <thead>

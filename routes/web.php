@@ -21,3 +21,4 @@ Route::get('/', function () {
 
 Route::get('/discovery/v2/events.json', [EventInfo::class, 'getEvents']);
 Route::get('/saveEvents', [AddEvent::class, 'saveEvents']);
+Route::get('/newEvents', [EventInfo::class, 'getNewEvents']);

@@ -3,7 +3,7 @@
   <!-- Container wrapper -->
   <div class="container">
     <!-- Navbar brand -->
-    <a class="navbar-brand me-2" href="https://mdbgo.com/">
+    <a class="navbar-brand me-2" href="/discovery/v2/events.json">
       TicketMaster
     </a>
 
@@ -25,11 +25,11 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
+          <a class="nav-link text-success" href="/newEvents">New Events</a>
         </li>
       </ul>
       <!-- Left links -->
-
+    
       <div class="d-flex align-items-center">
         <button data-mdb-ripple-init type="button" class="btn btn-link px-3 me-2" style="text-decoration: none">
           Accounts
