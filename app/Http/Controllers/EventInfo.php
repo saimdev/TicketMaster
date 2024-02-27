@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\NewEvent;
@@ -46,8 +47,10 @@ class EventInfo extends Controller
     {
         $events = NewEvent::paginate(10);
 
+        $accounts = Account::all();
+
         if ($events) {
-            return view('newevents', compact('events'));
+            return view('newevents', compact('events', 'accounts'));
         } else {
             echo "Failed to fetch new events.";
         }

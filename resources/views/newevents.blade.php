@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <style>
         .table-wrapper {
             overflow-x: auto;
@@ -45,7 +46,38 @@
                         $totalMinPrice += $event->min_price; 
                     @endphp
                 @endforeach
-                <a href="/stripe/{{$totalMinPrice}}" class="btn btn-success p-2 mx-2" style="border-radius: 5px; text-decoration:none; align-self:center;">Buy</a>
+                {{-- <a href="/stripe/{{$totalMinPrice}}" class="btn btn-success p-2 mx-2" style="border-radius: 5px; text-decoration:none; align-self:center;">Buy All Tickets</a> --}}
+                <button type="button" class="btn btn-danger mx-2" data-toggle="modal" data-target="#selectAccountModal">
+                    Buy All Tickets
+                </button>
+                <div class="modal fade" id="selectAccountModal" tabindex="-1" role="dialog" aria-labelledby="selectAccountModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="selectAccountModalLabel">Select Account</h4>
+                                <button type="button" class="close btn br-1" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="selectAccountForm">
+                                    <div class="form-group">
+                                        <label for="accountSelect">Choose Account:</label>
+                                        <select class="form-control" id="accountSelect">
+                                            @foreach($accounts as $account)
+                                                <option value="{{ $account->id }}">{{ $account->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="applyButton">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
         </div>
     
@@ -134,4 +166,24 @@
 </div>
 
 </body>
+<script>
+    document.getElementById('applyButton').addEventListener('click', function() {
+        var accountId = document.getElementById('accountSelect').value;
+        fetch('/submit-credentials', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ accountId: accountId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    </script>
 </html>
