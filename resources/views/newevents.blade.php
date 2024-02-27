@@ -35,7 +35,20 @@
 <body>
     <x-header/> 
     <div class="mt-1">
-    <h1>New Events</h1>
+        <div class="d-flex flex-row my-2">
+            <h1>New Events</h1>
+                @php
+                    $totalMinPrice = 0; 
+                @endphp
+                @foreach ($events as $event)
+                    @php
+                        $totalMinPrice += $event->min_price; 
+                    @endphp
+                @endforeach
+                <a href="/stripe/{{$totalMinPrice}}" class="btn btn-success p-2 mx-2" style="border-radius: 5px; text-decoration:none; align-self:center;">Buy</a>
+
+        </div>
+    
     <div class="table-wrapper">
         <table class="table">
             <thead>

@@ -31,12 +31,12 @@
       <!-- Left links -->
     
       <div class="d-flex align-items-center">
-        <button data-mdb-ripple-init type="button" class="btn btn-link px-3 me-2" style="text-decoration: none">
+        <a data-mdb-ripple-init type="button" class="btn btn-link px-3 me-2" href="/accounts" style="text-decoration: none">
           Accounts
-        </button>
-        <button data-mdb-ripple-init type="button" class="btn btn-primary me-3">
+        </a>
+        <a data-mdb-ripple-init type="button" class="btn btn-primary me-3" href="/addAccount">
           Add Account
-        </button>
+        </a>
       </div>
     </div>
 

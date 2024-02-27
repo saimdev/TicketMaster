@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Accounts;
 use App\Http\Controllers\AddEvent;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventInfo;
 
@@ -22,3 +24,9 @@ use App\Http\Controllers\EventInfo;
 Route::get('/', [EventInfo::class, 'getEvents']);
 Route::get('/saveEvents', [AddEvent::class, 'saveEvents']);
 Route::get('/newEvents', [EventInfo::class, 'getNewEvents']);
+
+Route::get('/addAccount', [Accounts::class, 'showAccount']);
+Route::post('/accountAdd', [Accounts::class, 'addAccount']);
+Route::get('/accounts', [Accounts::class, 'showAllAccount']);
+
+
